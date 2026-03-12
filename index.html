@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>A tree full of love !</title>
+    <style> 
+        body {
+            background-color: #0d1f2d;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: monospace;
+            color: #a8e6cf;
+        }
+        h1 {
+            margin-top: 30px;
+            font-size: 1.2rem;
+            letter-spacing: 3px;
+        }
+        #tree {
+            display: grid;
+            grid-template-columns: repeat(7, 40px);
+            grid-template-rows: repeat(10, 40px);
+            margin-top: 60px;
+        }
+    
+        
+        .empty { background: transparent; }
+        .green { background: #2d6a4f; }
+        .green-light { background: #52b788; }
+        .green-mid { background: #40916c; }
+        .green-dark { background: #1b4332; }
+        .brown { background: #4a3728; }
+        .brown-light { background: #6b4c3b; }
+        .grass { background: #52b788; }
+        .grass-dark { background: #2d6a4f; }
+
+        .leaf { 
+            cursor: pointer;
+            transition: transform 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+        .leaf:hover {
+            transform: scale(1.3);
+            background: #74c69d;
+            box-shadow: 0 0 8px #a8e6cf, 0 0 16px #52b788, 0 0 24px #a8e6cf;
+            z-index: 1;
+            position: relative;
+        }
+        #overlay {
+          display: none;
+          position: fixed;
+          inset: 0;
+          background: #0d1f2ddd;
+          align-items: center;
+          justify-content: center;
+          z-index: 10;
+          animation: fadein 0.4s ease;
+        }
+
+        #notecard {
+          background: #1a3a2a;
+          border: 2px solid #52b788;
+          padding: 40px;
+          text-align: center;
+          max-width: 340px;
+          font-family: monospace;
+          color: #a8e6cf;
+          font-size: 1.1rem;
+          line-height: 1.8;
+          animation: popIn 0.4s cubic-bezier(.34,1.56,.64,1);
+        }
+
+        @keyframes fadein {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+
+        @keyframes popIn {
+          from { transform: scale(0.8); opacity: 0; }
+          to { transform: scale(1); opacity: 1; }
+        }
+        #closeBtn {
+          margin-top: 24px;
+          background: transparent;
+          border: 2px solid #52b788;
+          color: #a8e6cf;
+          font-family: monospace;
+          padding: 8px 20px;
+          cursor: pointer;
+          font-size: 0.9rem;
+        }
+
+        #closeBtn:hover {
+          background: #52b788;
+          color: #0d1f2d;
+        }
+        #sky {
+          position: fixed;
+          inset: 0;
+          pointer-events: none;
+          z-index: 0;
+        }
+        #moon {
+          position: absolute;
+          top: 30px;
+          right: 80px;
+          width: 40px;
+          height: 40px;
+          background: #a8e6cf;
+          box-shadow: 4px 4px #52b788;
+          image-rendering: pixelated;
+        }
+        .star {
+          position: absolute;
+          width: 8px;
+          height: 8px;
+          background: #a8e6cf;
+         animation: twinkle 2s infinite ease-in-out;
+        }
+         #star1 { top: 20px; left: 10%; }
+        #star2 { top: 60px; left: 25%; }
+        #star3 { top: 15px; left: 50%; }
+        #star4 { top: 80px; right: 20%; }
+        #star5 { top: 40px; right: 35%; }
+
+        @keyframes twinkle {
+          0%, 100% { opacity: 1; transform: scale(1); }
+          50% { opacity: 0.3; transform: scale(0.5); }
+        }
+        @keyframes fall {
+          0% { transform: translateY(0) rotate(0deg); }
+          100% { transform: translateY(110vh) rotate(360deg); }
+        }
+
+    </style>
+    </head> 
+    <body>
+        <h1>Click a leaf... </h1>
+
+      <div id="sky">
+  <div id="moon"></div>
+  <div class="star" id="star1"></div>
+  <div class="star" id="star2"></div>
+  <div class="star" id="star3"></div>
+  <div class="star" id="star4"></div>
+  <div class="star" id="star5"></div>
+  </div>
+
+    <div id="tree">
+<!-- row 1 - treetop -->
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="green-dark"></div>
+  <div class="green-light leaf" id="leaf1">💚</div>
+  <div class="green-dark"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+
+  <!-- row 2 -->
+  <div class="empty"></div>
+  <div class="green-dark"></div>
+  <div class="green-light"></div>
+  <div class="green-mid"></div>
+  <div class="green-light"></div>
+  <div class="green-dark"></div>
+  <div class="empty leaf" id="leaf4"></div>
+
+  <!-- row 3 -->
+  <div class="green-dark"></div>
+  <div class="green-light"></div>
+  <div class="green-mid"></div>
+  <div class="green-light leaf" id="leaf2">🌸</div>
+  <div class="green-mid"></div>
+  <div class="green-light"></div>
+  <div class="green-dark"></div>
+
+  <!-- row 4 -->
+  <div class="green-dark"></div>
+  <div class="green-mid"></div>
+  <div class="green-light"></div>
+  <div class="green-mid"></div>
+  <div class="green-light"></div>
+  <div class="green-mid"></div>
+  <div class="green-dark"></div>
+
+  <!-- row 5 -->
+  <div class="empty"></div>
+  <div class="green-dark"></div>
+  <div class="green-mid"></div>
+  <div class="green-light"></div>
+  <div class="green-mid leaf" id="leaf3">🌸</div>
+  <div class="green-dark"></div>
+  <div class="empty"></div>
+
+  <!-- row 6 - trunk starts -->
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="brown-light"></div>
+  <div class="brown"></div>
+  <div class="empty"></div>
+   <div class="empty"></div>
+
+  <!-- row 7 -->
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="brown-light"></div>
+  <div class="brown-light"></div>
+  <div class="brown"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+
+  <!-- row 8 -->
+  <div class="empty"></div>
+  <div class="empty"></div>
+  <div class="brown-light"></div>
+  <div class="brown"></div>
+  <div class="brown"></div>
+  <div class="empty"></div>
+  <div class="empty"></div>
+
+  <!-- row 9 - trunk base -->
+  <div class="empty"></div>
+  <div class="brown-light"></div>
+  <div class="brown-light"></div>
+  <div class="brown"></div>
+  <div class="brown"></div>
+  <div class="brown"></div>
+  <div class="empty"></div>
+
+  <!-- row 10 - grass -->
+  <div class="grass-dark"></div>
+  <div class="grass"></div>
+  <div class="grass"></div>
+  <div class="grass-dark"></div>
+  <div class="grass"></div>
+  <div class="grass"></div>
+  <div class="grass-dark"></div>
+   
+    <div id="overlay">
+    <div id="notecard">
+    <p id="notetext"></p>
+    <button id="closeBtn">close 🍃</button>
+    </div>
+    </div>
+    <script> 
+        const notes = {
+            leaf1: "I know some days might suck, but i hope you know that your hard work will be worth it in the end. 💚",
+            leaf2:"I am so proud of you, for all you are, and all you are becoming  🌸",
+            leaf3:"I love you baby, always have and always will.  🌸",
+             leaf4: "you found my secret leaf!!!!!! 🌿 thank you for loving me everyday, even with all your work and struggles. I hope you keep on trying and working hard, and i hope this cheered you up :) I love you baby "
+        };
+          const overlay = document.getElementById('overlay');
+        const notetext = document.getElementById("notetext");
+
+     document.querySelectorAll(".leaf").forEach(leaf => {
+    leaf.addEventListener("click", () => {
+      notetext.textContent = notes[leaf.id];
+      overlay.style.display = "flex";
+    });
+  });
+  document.getElementById("closeBtn").addEventListener("click", () => {
+    overlay.style.display = "none";
+  });
+
+  function createFallingLeaf() {
+    const leaf = document.createElement("div");
+    leaf.textContent = "🍃";
+    leaf.style.position = "fixed";
+    leaf.style.top = "-30px";
+    leaf.style.left = Math.random() * 100 + "vw";
+    leaf.style.fontSize = Math.random() * 1 + 0.8 + "rem";
+    leaf.style.opacity = Math.random() * 0.5 + 0.3;
+    leaf.style.zIndex = "0";
+    leaf.style.pointerEvents = "none";
+    leaf.style.animation = `fall ${Math.random() * 4 + 4}s linear forwards`;
+    document.body.appendChild(leaf);
+
+    setTimeout(() => leaf.remove(), 8000);
+  }
+
+  setInterval(createFallingLeaf, 800); 
+    </script>
+    </body>
+    </html>
